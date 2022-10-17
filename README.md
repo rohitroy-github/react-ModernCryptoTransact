@@ -4,4 +4,5 @@ Along with this, we can send some <b>GIF</b> to make the <b>transaction</b> more
 
 This project is currently under heavy development phase.<br />
 
-Currently I'm testing the smart contracts over <a href="https://goerlifaucet.com/"><b>Goerli</a> Ethereum</b> test net ! <br />
+Currently I'm testing the smart contracts over <a href="https://goerlifaucet.com/"><b>Goerli</a> Ethereum</b> test net integrated with <a href="https://hardhat.org/"><b>HardHat</b></a> Blockchain development environment ! <br />
+
