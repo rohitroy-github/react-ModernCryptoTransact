@@ -1,9 +1,13 @@
+// Welcome Component
+
+// useContext > accessing ContextProvider
 import React, { useContext } from "react";
+
 import { AiFillPlayCircle } from "react-icons/ai";
 import { SiEthereum } from "react-icons/si";
 import { BsInfoCircle } from "react-icons/bs";
 
-// import { TransactionContext } from "../context/TransactionContext";
+import { TransactionContext } from "../context/TransactionContext";
 // import { shortenAddress } from "../utils/shortenAddress";
 import Loader from "./Loader";
 
@@ -23,14 +27,7 @@ const Input = ({ placeholder, name, type, value, handleChange }) => (
 );
 
 const Welcome = () => {
-  // const {
-  //   currentAccount,
-  //   connectWallet,
-  // handleChange,
-  //   sendTransaction,
-  //   formData,
-  //   isLoading,
-  // } = useContext(TransactionContext);
+  const { connectWallet, currentAccount } = useContext(TransactionContext);
 
   const handleSubmit = (e) => {
     // const { addressTo, amount, keyword, message } = formData;
@@ -52,7 +49,7 @@ const Welcome = () => {
             Explore the crypto world. Buy and sell cryptocurrencies easily on
             Krypto.
           </p>
-          {/* {!currentAccount && (
+          {!currentAccount && (
             <button
               type="button"
               onClick={connectWallet}
@@ -63,7 +60,7 @@ const Welcome = () => {
                 Connect Wallet
               </p>
             </button>
-          )} */}
+          )}
 
           {/* Grid Portion */}
           <div className="grid sm:grid-cols-3 grid-cols-2 w-full mt-10">
