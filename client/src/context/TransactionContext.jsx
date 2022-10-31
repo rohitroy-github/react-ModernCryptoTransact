@@ -1,16 +1,16 @@
 // Blockchain Connection
 // Main Blockchain/ Metamask connection
 
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 
-import { ethers } from "ethers";
+import {ethers} from "ethers";
 
-import { contractABI, contractAddress } from "../utils/constants";
-import { AiFillFileAdd } from "react-icons/ai";
+import {contractABI, contractAddress} from "../utils/constants";
+import {AiFillFileAdd} from "react-icons/ai";
 
 export const TransactionContext = React.createContext();
 
-const { ethereum } = window;
+const {ethereum} = window;
 
 // Fetch ethereum contract
 const getEthereumContract = () => {
@@ -30,7 +30,7 @@ const getEthereumContract = () => {
   });
 };
 
-export const TransactionProvider = ({ children }) => {
+export const TransactionProvider = ({children}) => {
   const [currentAccount, setCurrentAccount] = useState("");
 
   // Check if Metatmask is connected ?
@@ -38,14 +38,14 @@ export const TransactionProvider = ({ children }) => {
     try {
       if (!ethereum) return alert("Please install MetaMask.");
 
-      const accounts = await ethereum.request({ method: "eth_accounts" });
+      const accounts = await ethereum.request({method: "eth_accounts"});
 
       if (accounts.length) {
         setCurrentAccount(accounts[0]);
 
         getAllTransactions();
       } else {
-        console.log("No accounts found");
+        console.log("No accounts found !");
       }
     } catch (error) {
       console.log(error);
@@ -76,7 +76,7 @@ export const TransactionProvider = ({ children }) => {
   }, []);
 
   return (
-    <TransactionContext.Provider value={{ connectWallet, currentAccount }}>
+    <TransactionContext.Provider value={{connectWallet, currentAccount}}>
       {children}
     </TransactionContext.Provider>
   );
