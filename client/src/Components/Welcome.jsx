@@ -1,13 +1,13 @@
 // Welcome Component
 
 // useContext > accessing ContextProvider
-import React, { useContext } from "react";
+import React, {useContext} from "react";
 
-import { AiFillPlayCircle } from "react-icons/ai";
-import { SiEthereum } from "react-icons/si";
-import { BsInfoCircle } from "react-icons/bs";
+import {AiFillPlayCircle} from "react-icons/ai";
+import {SiEthereum} from "react-icons/si";
+import {BsInfoCircle} from "react-icons/bs";
 
-import { TransactionContext } from "../context/TransactionContext";
+import {TransactionContext} from "../context/TransactionContext";
 // import { shortenAddress } from "../utils/shortenAddress";
 import Loader from "./Loader";
 
@@ -15,7 +15,7 @@ import Loader from "./Loader";
 const companyCommonStyles =
   "min-h-[70px] sm:px-0 px-2 sm:min-w-[120px] flex justify-center items-center border-[0.5px] border-gray-400 text-sm font-light text-white";
 
-const Input = ({ placeholder, name, type, value, handleChange }) => (
+const Input = ({placeholder, name, type, value, handleChange}) => (
   <input
     placeholder={placeholder}
     type={type}
@@ -27,16 +27,26 @@ const Input = ({ placeholder, name, type, value, handleChange }) => (
 );
 
 const Welcome = () => {
-  const { connectWallet, currentAccount } = useContext(TransactionContext);
+  const {
+    currentAccount,
+    connectWallet,
+    handleChange,
+    sendTransaction,
+    formData,
+    // isLoading,
+  } = useContext(TransactionContext);
+
+  useContext(TransactionContext);
 
   const handleSubmit = (e) => {
-    // const { addressTo, amount, keyword, message } = formData;
-    // e.preventDefault();
-    // if (!addressTo || !amount || !keyword || !message) return;
-    // sendTransaction();
-  };
+    const {addressTo, amount, keyword, message} = formData;
+    e.preventDefault();
 
-  const handleChange = () => {};
+    // checking wheather all fields are filled up ?
+    if (!addressTo || !amount || !keyword || !message) return;
+
+    sendTransaction();
+  };
 
   return (
     <div className="flex w-full justify-center items-center">
