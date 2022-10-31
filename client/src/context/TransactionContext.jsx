@@ -22,12 +22,14 @@ const getEthereumContract = () => {
     signer
   );
 
-  // check
-  console.log({
-    provider,
-    signer,
-    transactionContract,
-  });
+  // checking
+  // console.log({
+  //   provider,
+  //   signer,
+  //   transactionContract,
+  // });
+
+  return transactionContract;
 };
 
 export const TransactionProvider = ({children}) => {
@@ -40,6 +42,15 @@ export const TransactionProvider = ({children}) => {
     keyword: "",
     message: "",
   });
+
+  // usestate for sendTransaction loading ?
+  const [isLoading, setIsLoading] = useState(false);
+
+  // usestate for strong transactionCount
+  const [transactionCount, setTransactionCount] = useState(
+    // to avoid reset to 0 at every reload !
+    localStorage.getItem("transactionCount")
+  );
 
   const handleChange = (e, name) => {
     setformData((prevState) => ({...prevState, [name]: e.target.value}));
@@ -88,39 +99,42 @@ export const TransactionProvider = ({children}) => {
       if (ethereum) {
         const {addressTo, amount, keyword, message} = formData;
 
-        getEthereumContract();
+        // Checking ?
+        // getEthereumContract();
+
         // const transactionsContract = createEthereumContract();
-        // const parsedAmount = ethers.utils.parseEther(amount);
+        const transactionsContract = getEthereumContract();
+        const parsedAmount = ethers.utils.parseEther(amount);
 
-        // await ethereum.request({
-        //   method: "eth_sendTransaction",
-        //   params: [
-        //     {
-        //       from: currentAccount,
-        //       to: addressTo,
-        //       gas: "0x5208",
-        //       value: parsedAmount._hex,
-        //     },
-        //   ],
-        // });
+        await ethereum.request({
+          method: "eth_sendTransaction",
+          params: [
+            {
+              from: currentAccount,
+              to: addressTo,
+              gas: "0x5208",
+              value: parsedAmount._hex,
+            },
+          ],
+        });
 
-        // const transactionHash = await transactionsContract.addToBlockchain(
-        //   addressTo,
-        //   parsedAmount,
-        //   message,
-        //   keyword
-        // );
+        const transactionHash = await transactionsContract.addToBlockchain(
+          addressTo,
+          parsedAmount,
+          message,
+          keyword
+        );
 
-        // setIsLoading(true);
-        // console.log(`Loading - ${transactionHash.hash}`);
-        // await transactionHash.wait();
-        // console.log(`Success - ${transactionHash.hash}`);
-        // setIsLoading(false);
+        setIsLoading(true);
+        console.log(`Loading - ${transactionHash.hash}`);
+        await transactionHash.wait();
+        console.log(`Success - ${transactionHash.hash}`);
+        setIsLoading(false);
 
-        // const transactionsCount =
-        //   await transactionsContract.getTransactionCount();
+        const transactionsCount =
+          await transactionsContract.getTransactionCount();
 
-        // setTransactionCount(transactionsCount.toNumber());
+        setTransactionCount(transactionsCount.toNumber());
         // window.location.reload();
       } else {
         console.log("No ethereum object");
