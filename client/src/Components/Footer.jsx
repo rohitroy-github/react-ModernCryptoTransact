@@ -6,11 +6,14 @@ import logo from "../../images/logo.png";
 
 const Footer = () => (
   <div className="w-full flex md:justify-center justify-between items-center flex-col p-4 gradient-bg-footer">
-    <div className="w-full flex sm:flex-row flex-col justify-between items-center my-4">
-      <div className="flex flex-[0.5] justify-center items-center">
-        <img src={logo} alt="logo" className="w-32" />
+    <div className="w-full flex md:flex-row flex-col justify-evenly items-center my-4">
+      <div className="flex flex-[0.6] justify-center items-center">
+        {/* <img src={logo} alt="logo" className="w-32" /> */}
+        <h3 className="text-2xl sm:text-3xl text-white text-gradient">
+          MordernCryptoTransact
+        </h3>
       </div>
-      <div className="flex flex-1 justify-evenly items-center flex-wrap sm:mt-0 mt-5 w-full">
+      <div className="flex flex-1 justify-evenly items-center flex-wrap w-full mt-5 md:mt-2">
         <p className="text-white text-base text-center mx-2 cursor-pointer">
           <a href="https://coinmarketcap.com/">CoinMarketCap</a>
         </p>
