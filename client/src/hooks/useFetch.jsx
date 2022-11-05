@@ -22,6 +22,7 @@ const useFetch = ({keyword}) => {
     }
   };
 
+  // whenever keyword changes
   useEffect(() => {
     if (keyword) fetchGifs();
   }, [keyword]);
