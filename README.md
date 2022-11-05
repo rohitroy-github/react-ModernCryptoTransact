@@ -1,4 +1,4 @@
-<h2>Project <b>MordernCryptoTransact</b></h2>
+<h3>Project <b>MordernCryptoTransact</b></h3>
 <br />
 This is a <b>React + Web3.0</b> project where we can send <b>crypto currencies</b> to any specific address.<br />
 
