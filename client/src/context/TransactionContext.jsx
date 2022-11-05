@@ -22,13 +22,6 @@ const getEthereumContract = () => {
     signer
   );
 
-  // checking
-  // console.log({
-  //   provider,
-  //   signer,
-  //   transactionContract,
-  // });
-
   return transactionContract;
 };
 
@@ -52,6 +45,7 @@ export const TransactionProvider = ({children}) => {
     localStorage.getItem("transactionCount")
   );
 
+  // fetching data from the entered form data !
   const handleChange = (e, name) => {
     setformData((prevState) => ({...prevState, [name]: e.target.value}));
   };
@@ -158,7 +152,7 @@ export const TransactionProvider = ({children}) => {
         connectWallet,
         // transactions,
         currentAccount,
-        // isLoading,
+        isLoading,
         sendTransaction,
         handleChange,
         formData,
