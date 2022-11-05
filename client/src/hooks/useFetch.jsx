@@ -1,3 +1,5 @@
+// fetching gifs from the giphy website API
+
 import {useEffect, useState} from "react";
 
 const APIKEY = import.meta.env.VITE_GIPHY_API;
@@ -22,7 +24,7 @@ const useFetch = ({keyword}) => {
     }
   };
 
-  // whenever keyword changes
+  // whenever keyword chnages call fetchGifs
   useEffect(() => {
     if (keyword) fetchGifs();
   }, [keyword]);

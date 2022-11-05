@@ -4,9 +4,12 @@ import {TransactionContext} from "../context/TransactionContext";
 
 import useFetch from "../hooks/useFetch";
 
+// fetching dummy data for initial testing purpose
 import dummyData from "../utils/dummyData";
+
 import {shortenAddress} from "../utils/shortenAddress";
 
+// design for individual transaction card
 const TransactionsCard = ({
   addressTo,
   addressFrom,
@@ -29,7 +32,7 @@ const TransactionsCard = ({
       flex-col p-3 rounded-md hover:shadow-2xl"
     >
       <div className="flex flex-col items-center w-full mt-3">
-        <div className="display-flex justify-start w-full mb-6 p-2">
+        <div className="w-full mb-6 p-2">
           <a
             href={`https://ropsten.etherscan.io/address/${addressFrom}`}
             target="_blank"
@@ -58,7 +61,7 @@ const TransactionsCard = ({
         </div>
         <img
           src={gifUrl || url}
-          alt="gif"
+          alt="nature"
           className="w-full h-64 2xl:h-96 rounded-md shadow-lg object-cover"
         />
         <div className="bg-black p-3 px-5 w-max rounded-3xl -mt-5 shadow-2xl">
@@ -81,15 +84,13 @@ const Transactions = () => {
           </h3>
         ) : (
           <h3 className="text-white text-3xl text-center my-2">
-            Connect your account to see the latest transactions
+            Connect your account to see the latest transactions !
           </h3>
         )}
 
+        {/* looping over the list of transactions  */}
         <div className="flex flex-wrap justify-center items-center mt-10">
           {[...dummyData, ...transactions].reverse().map((transaction, i) => (
-            <TransactionsCard key={i} {...transaction} />
-          ))}
-          {dummyData.reverse().map((transaction, i) => (
             <TransactionsCard key={i} {...transaction} />
           ))}
         </div>
