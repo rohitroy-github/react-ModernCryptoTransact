@@ -55,11 +55,12 @@ export const TransactionProvider = ({children}) => {
   const getAllTransactions = async () => {
     try {
       if (ethereum) {
-        const transactionsContract = createEthereumContract();
+        const transactionsContract = getEthereumContract();
 
         const availableTransactions =
           await transactionsContract.getAllTransactions();
 
+        // making the transaction data a bit structured
         const structuredTransactions = availableTransactions.map(
           (transaction) => ({
             addressTo: transaction.receiver,
@@ -73,11 +74,11 @@ export const TransactionProvider = ({children}) => {
           })
         );
 
-        // console.log(structuredTransactions);
+        console.log(availableTransactions);
 
         setTransactions(structuredTransactions);
       } else {
-        console.log("Ethereum is not present");
+        console.log("Please install MetaMask !");
       }
     } catch (error) {
       console.log(error);
@@ -94,7 +95,7 @@ export const TransactionProvider = ({children}) => {
       if (accounts.length) {
         setCurrentAccount(accounts[0]);
 
-        // getAllTransactions();
+        getAllTransactions();
       } else {
         console.log("No accounts found !");
       }
@@ -107,14 +108,11 @@ export const TransactionProvider = ({children}) => {
   const checkIfTransactionsExists = async () => {
     try {
       if (ethereum) {
-        const transactionsContract = createEthereumContract();
-        const currentTransactionCount =
+        const transactionsContract = getEthereumContract();
+        const transactionCount =
           await transactionsContract.getTransactionCount();
 
-        window.localStorage.setItem(
-          "transactionCount",
-          currentTransactionCount
-        );
+        window.localStorage.setItem("transactionCount", transactionCount);
       }
     } catch (error) {
       console.log(error);
